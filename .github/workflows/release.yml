@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  release:
+    types: [published] # Run if publish manually triggered
+  schedule:
+    - cron: '0 0 * * 0' # Run every Sunday at midnight
+  workflow_dispatch: # Run if action manually triggered
+
+jobs:
+  publish:
+    if: ${{ github.event_name == 'release' || github.event_name == 'workflow_dispatch' || needs.release.outputs.release_tag != '' }}
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      # Post release steps
+      - name: Post release steps
+        run: echo "Post release steps"
+
+
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      release_tag: ${{ steps.release_draft.outputs.release_tag }}
+    steps:
+      - name: Release draft
+        id: release_draft
+        uses: ./
