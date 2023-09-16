@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   update_release_draft:
     runs-on: ubuntu-latest
@@ -30,3 +34,4 @@ jobs:
           title: "Update readme version"
           body: "Updates reame version to ${{ steps.release-draft.outputs.tag_name }}."
           branch: "skip/update-readme-${{ steps.release-draft.outputs.tag_name }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
