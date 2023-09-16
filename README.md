@@ -14,6 +14,9 @@ on:
     - cron: '0 0 * * 0' # Run every Sunday at midnight
   workflow_dispatch: # Run if action manually triggered
 
+permissions:
+  contents: write # Needed to publish a draft release
+
 jobs:
   publish:
     runs-on: ubuntu-latest

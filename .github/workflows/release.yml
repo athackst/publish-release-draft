@@ -7,6 +7,9 @@ on:
     - cron: '0 0 * * 0' # Run every Sunday at midnight
   workflow_dispatch: # Run if action manually triggered
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     if: ${{ github.event_name == 'release' || github.event_name == 'workflow_dispatch' || needs.release.outputs.release_tag != '' }}
