@@ -26,6 +26,7 @@ jobs:
     outputs:
       release_tag: ${{ steps.release_draft.outputs.release_tag }}
     steps:
+      - uses: actions/checkout@v4
       - name: Release draft
         id: release_draft
         uses: ./
