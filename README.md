@@ -22,10 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_tag: ${{ steps.publish_draft.outputs.release_tag }}
+      latest_tag: ${{ steps.publish_draft.outputs.latest_tag }}
     steps:
       - name: publish draft
         id: publish_draft
-        uses: athackst/release-publisher@v0.1.1
+        uses: athackst/release-publisher@v0.2.1
 ```
 
 
@@ -36,3 +37,4 @@ jobs:
 ## Outputs
 
 **release_tag**: The tag of the published release.
+**latest_tag**: The tag of the latest release.
