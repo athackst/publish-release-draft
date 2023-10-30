@@ -12,6 +12,9 @@ outputs:
   release_tag:
     description: "The tag that was published"
     value: ${{ steps.get_release_tag.outputs.release_tag }}
+  latest_tag:
+    description: "The latest tag"
+    value: ${{ steps.get_latest_tag.outputs.latest_tag }}
 runs:
   using: 'composite'
   steps:
@@ -39,3 +42,10 @@ runs:
           gh release edit ${{ steps.get_release_tag.outputs.release_tag }} --draft=false
         env:
           GH_TOKEN: ${{ inputs.github_token }}
+
+      - name: Get latest tag
+        id: get_latest_tag
+        shell: bash
+        run: |
+          git fetch --tags
+          echo "latest_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT

@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_tag: ${{ steps.release_draft.outputs.release_tag }}
+      latest_tag: ${{ steps.fetch-tag.outputs.latest_tag }}
     steps:
       - uses: actions/checkout@v4
       - name: Release draft
@@ -24,10 +25,10 @@ jobs:
 
   readme:
     runs-on: ubuntu-latest
-    if: ${{ needs.release.outputs.release_tag != '' }}
     needs: release
+    if: needs.release.outputs.latest_tag != ''
     env:
-      VERSION: ${{ needs.release.outputs.release_tag }}
+      VERSION: ${{ needs.release.outputs.latest_tag }}
     steps:
       - uses: actions/checkout@v4
       - name: Update readme.md
