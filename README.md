@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: publish draft
         id: publish_draft
-        uses: athackst/release-publisher@v0.1.0
+        uses: athackst/release-publisher@v0.1.1
 ```
 
 
