@@ -11,15 +11,6 @@ permissions:
   contents: write
 
 jobs:
-  publish:
-    if: ${{ github.event_name == 'release' || github.event_name == 'workflow_dispatch' || needs.release.outputs.release_tag != '' }}
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-      # Post release steps
-      - name: Post release steps
-        run: echo "Post release steps"
-
 
   release:
     runs-on: ubuntu-latest
@@ -30,3 +21,32 @@ jobs:
       - name: Release draft
         id: release_draft
         uses: ./
+
+  readme:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'release' || github.event_name == 'workflow_dispatch' || needs.release.outputs.release_tag != '' }}
+    needs: release
+    env:
+      VERSION: ${{ needs.release.outputs.release_tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update readme.md
+        run: |
+          echo "Bumping version to ${VERSION}"
+          bash .github/scripts/update_readme.sh ${VERSION}
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v5.0.2
+        with:
+          title: "Update readme version"
+          body: "Updates reame version to ${{ env.VERSION }}."
+          branch: "skip/update-readme-${{ env.VERSION }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    if: ${{ github.event_name == 'release' || github.event_name == 'workflow_dispatch' || needs.release.outputs.release_tag != '' }}
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      # Post release steps
+      - name: Post release steps
+        run: echo "Post release steps"

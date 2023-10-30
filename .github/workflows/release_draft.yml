@@ -21,17 +21,3 @@ jobs:
           config-name: release-drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v4
-      - name: Update readme.md
-        env:
-          VERSION: ${{ steps.release-draft.outputs.tag_name }}
-        run: |
-          echo "Bumping version to ${VERSION}"
-          bash .github/scripts/update_readme.sh ${VERSION}
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v5.0.2
-        with:
-          title: "Update readme version"
-          body: "Updates reame version to ${{ steps.release-draft.outputs.tag_name }}."
-          branch: "skip/update-readme-${{ steps.release-draft.outputs.tag_name }}"
-          token: ${{ secrets.GITHUB_TOKEN }}
