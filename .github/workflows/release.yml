@@ -42,6 +42,7 @@ jobs:
           body: "Updates reame version to ${{ env.VERSION }}."
           branch: "skip/update-readme-${{ env.VERSION }}"
           token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
 
   publish:
     if: ${{ github.event_name == 'release' || github.event_name == 'workflow_dispatch' || needs.release.outputs.release_tag != '' }}
