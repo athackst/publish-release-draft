@@ -17,6 +17,7 @@ runs:
   steps:
       - name: Get draft release tag
         id: get_release_tag
+        shell: bash
         run: |
           # Fetch the list of draft releases from GitHub API
           response=$(curl -s -H "Authorization: token ${{ inputs.github_token }}" \
@@ -33,6 +34,7 @@ runs:
 
       - name: Publish release draft
         if: steps.get_release_tag.outputs.release_tag != ''
+        shell: bash
         run: |
           gh release edit ${{ steps.get_release_tag.outputs.release_tag }} --draft=false
         env:
