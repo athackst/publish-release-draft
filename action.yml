@@ -10,7 +10,7 @@ inputs:
     default: '${{ github.token }}'
 outputs:
   release_tag:
-    descirption: "The tag that was published"
+    description: "The tag that was published"
     value: ${{ steps.get_release_tag.outputs.release_tag }}
 runs:
   using: 'composite'
