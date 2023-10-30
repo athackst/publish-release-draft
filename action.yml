@@ -48,4 +48,6 @@ runs:
         shell: bash
         run: |
           git fetch --tags
-          echo "latest_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_OUTPUT
+          latest_tag=$(git describe --tags --abbrev=0 $(git rev-list --tags --max-count=1))
+          echo "Found latest tag $latest_tag"
+          echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
