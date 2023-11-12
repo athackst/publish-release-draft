@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: publish draft
         id: publish_draft
-        uses: athackst/release-publisher@v0.2.5
+        uses: athackst/release-publisher@v0.2.6
 ```
 
 
