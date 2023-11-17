@@ -24,27 +24,6 @@ jobs:
         id: release_draft
         uses: ./
 
-  readme:
-    runs-on: ubuntu-latest
-    needs: release
-    if: ${{ needs.release.outputs.latest_tag != '' }}
-    env:
-      VERSION: ${{ needs.release.outputs.latest_tag }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Update readme.md
-        run: |
-          echo "Bumping version to ${VERSION}"
-          bash .github/scripts/update_readme.sh ${VERSION}
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v5.0.2
-        with:
-          title: "Update readme version"
-          body: "Updates reame version to ${{ env.VERSION }}."
-          branch: "skip/update-readme-${{ env.VERSION }}"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-
   publish:
     if: ${{ github.event_name == 'release' || github.event_name == 'workflow_dispatch' || needs.release.outputs.release_tag != '' }}
     needs: release
