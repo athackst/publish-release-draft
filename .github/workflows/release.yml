@@ -3,30 +3,13 @@ name: Release
 on:
   release:
     types: [published] # Run if publish manually triggered
-  schedule:
-    - cron: '0 0 * * 0' # Run every Sunday at midnight
   workflow_dispatch: # Run if action manually triggered
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
-
-  release:
-    runs-on: ubuntu-latest
-    outputs:
-      release_tag: ${{ steps.release_draft.outputs.release_tag }}
-      latest_tag: ${{ steps.release_draft.outputs.latest_tag }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Release draft
-        id: release_draft
-        uses: ./
-
-  publish:
-    if: ${{ github.event_name == 'release' || github.event_name == 'workflow_dispatch' || needs.release.outputs.release_tag != '' }}
-    needs: release
+  post-release:
     runs-on: ubuntu-latest
     steps:
       # Post release steps
