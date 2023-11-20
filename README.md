@@ -39,5 +39,5 @@ jobs:
 
 ## Outputs
 
-**release_tag**: The tag of the published release.
-**latest_tag**: The tag of the latest release.
+- **release_tag**: The tag of the published release.
+- **latest_tag**: The tag of the latest release.
