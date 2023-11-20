@@ -27,6 +27,8 @@ jobs:
       - name: Release draft
         id: publish_release_draft
         uses: ./
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to trigger release workflow
 
 ```
 
