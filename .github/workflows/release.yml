@@ -2,7 +2,7 @@ name: Release
 
 on:
   release:
-    types: [published] # Run if publish manually triggered
+    types: [published, released] # Run if publish triggered
   workflow_dispatch: # Run if action manually triggered
 
 permissions:
