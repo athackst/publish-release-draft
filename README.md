@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Release draft
         id: publish_release_draft
-        uses: ./
+        uses: athackst/publish-release-draft@main
 
   # Optional to run release workflow when released
   release-workflow:
