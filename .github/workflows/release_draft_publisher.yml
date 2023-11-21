@@ -21,6 +21,7 @@ jobs:
         id: publish_release_draft
         uses: ./
 
+  # Optional to run release workflow when released
   release-workflow:
     if: ${{ needs.publish-release.outputs.release_tag != ''}}
     needs: publish-release
