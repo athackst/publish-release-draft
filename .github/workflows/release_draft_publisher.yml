@@ -20,6 +20,8 @@ jobs:
       - name: Release draft
         id: publish_release_draft
         uses: ./
-      - name: Run Release workflow # Optional trigger the release workflow
-        if: ${{ steps.publish_release_draft.outputs.release_tag != ''}}
-        uses: athackst/release-publisher/.github/workflows/release.yml@main
+
+  release-workflow:
+    if: ${{ needs.publish-release.outputs.release_tag != ''}}
+    needs: publish-release
+    uses: athackst/release-publisher/.github/workflows/release.yml@main
