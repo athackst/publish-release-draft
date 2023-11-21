@@ -1,6 +1,6 @@
-# Release draft publisher
+# Publish release draft
 
-This GitHub Action publishes the latest draft release for a repository. It is intended to be used with the Release Drafter so that you can automatically release on a scheduled cadence.
+This GitHub Action publishes the latest draft release for a repository. It is intended to be used with the [Release Drafter](https://github.com/release-drafter/release-drafter) so that you can automatically release on a scheduled cadence.
 
 ## Usage
 
@@ -32,13 +32,13 @@ jobs:
   release-workflow:
     if: ${{ needs.publish-release.outputs.release_tag != ''}}
     needs: publish-release
-    uses: athackst/release-publisher/.github/workflows/release.yml@main
+    uses: athackst/publish-release-draft/.github/workflows/release.yml@main
 ```
 
 
 ## Inputs
 
-**github_token** (required): The GitHub token to use for authentication. Defaults to `${{ secrets.GITHUB_TOKEN }}`.
+- **github_token** (required): The GitHub token to use for authentication. Defaults to `${{ secrets.GITHUB_TOKEN }}`.
 
 ## Outputs
 
