@@ -16,7 +16,8 @@
 		"vscode": {
 			"extensions": [
 				"arahata.linter-actionlint",
-				"GitHub.vscode-github-actions"
+				"GitHub.vscode-github-actions",
+				"eamodio.gitlens"
 			]
 		}
 	},
