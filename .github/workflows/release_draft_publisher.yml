@@ -8,6 +8,9 @@ on:
 permissions:
   contents: write # Needed to publish a draft release
 
+env:
+  GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
 jobs:
 
   publish-release:
