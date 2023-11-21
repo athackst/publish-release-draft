@@ -24,11 +24,15 @@ jobs:
       latest_tag: ${{ steps.publish_release_draft.outputs.latest_tag }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.RELEASE_TOKEN }} # Needed to trigger release workflow
       - name: Release draft
         id: publish_release_draft
         uses: ./
+
+  # Optional to run release workflow when released
+  release-workflow:
+    if: ${{ needs.publish-release.outputs.release_tag != ''}}
+    needs: publish-release
+    uses: athackst/release-publisher/.github/workflows/release.yml@main
 ```
 
 
