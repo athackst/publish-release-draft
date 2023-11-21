@@ -6,9 +6,6 @@ on:
   workflow_dispatch: # Run if action manually triggered
   workflow_call:
 
-permissions:
-  contents: write
-
 jobs:
   post-release:
     runs-on: ubuntu-latest
