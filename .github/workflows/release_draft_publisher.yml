@@ -8,9 +8,6 @@ on:
 permissions:
   contents: write # Needed to publish a draft release
 
-env:
-  GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-
 jobs:
 
   publish-release:
@@ -20,8 +17,9 @@ jobs:
       latest_tag: ${{ steps.publish_release_draft.outputs.latest_tag }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.RELEASE_TOKEN }} # Needed to trigger release workflow
       - name: Release draft
         id: publish_release_draft
         uses: ./
+      - name: Run Release workflow # Optional trigger the release workflow
+        if: ${{ steps.publish_release_draft.outputs.release_tag != ''}}
+        uses: athackst/release-publisher/.github/workflows/release.yml@main

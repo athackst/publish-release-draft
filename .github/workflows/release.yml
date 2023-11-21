@@ -2,8 +2,9 @@ name: Release
 
 on:
   release:
-    types: [published, released] # Run if publish triggered
+    types: [published] # Run if publish triggered
   workflow_dispatch: # Run if action manually triggered
+  workflow_call:
 
 permissions:
   contents: write
