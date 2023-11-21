@@ -25,4 +25,4 @@ jobs:
   release-workflow:
     if: ${{ needs.publish-release.outputs.release_tag != ''}}
     needs: publish-release
-    uses: athackst/release-publisher/.github/workflows/release.yml@main
+    uses: athackst/publish-release-draft/.github/workflows/release.yml@main
